@@ -1,5 +1,6 @@
 #include <iostream>
 #include "mesh.hpp"
+#include "NeighborBuilder.hpp"
 
 int main()
 {
@@ -11,8 +12,27 @@ int main()
 
     mesh.add_triangle(v0, v1, v2);
 
+    int v3 = mesh.add_vertex({1, 1, 0});
+    mesh.add_triangle(v1, v3, v2);
+
     std::cout << "Vertices: " << mesh.vertex_count() << "\n";
     std::cout << "Faces: " << mesh.face_count() << "\n";
+
+    Topology::build_neighbors(mesh);
+
+    for (size_t i = 0; i < mesh.vertex_count(); ++i)
+    {
+        std::cout << "Vertex " << i
+                  << " len neighbors: "
+                  << mesh.neighbors[i].size() << "\n";
+        std::cout << "neighbors: \n";
+        for (size_t j = 0; j < mesh.neighbors[i].size(); ++j)
+        {
+            std::cout << mesh.neighbors[i][j] << ", ";
+        }
+        std::cout << "\n";
+  
+    }
 
     return 0;
 }

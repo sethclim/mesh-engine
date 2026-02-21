@@ -4,3 +4,4 @@ add_executable(mesh_core_test
 
 target_link_libraries(mesh_core_test PRIVATE core)
 target_link_libraries(mesh_core_test PRIVATE topology)
+target_link_libraries(mesh_core_test PRIVATE algorithms)

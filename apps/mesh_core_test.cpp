@@ -1,6 +1,7 @@
 #include <iostream>
 #include "mesh.hpp"
 #include "NeighborBuilder.hpp"
+#include "Laplacian.hpp"
 
 int main()
 {
@@ -31,7 +32,16 @@ int main()
             std::cout << mesh.neighbors[i][j] << ", ";
         }
         std::cout << "\n";
-  
+    }
+
+    double alpha = 0.1;
+    auto lap = Algorithms::Laplacian(mesh);
+
+    for (size_t i = 0; i < mesh.vertex_count(); ++i)
+    {
+        mesh.vertices[i].pos.x += alpha * lap[i].x;
+        mesh.vertices[i].pos.y += alpha * lap[i].y;
+        mesh.vertices[i].pos.z += alpha * lap[i].z;
     }
 
     return 0;

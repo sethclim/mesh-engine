@@ -18,6 +18,8 @@ find_package(VTK
 add_subdirectory(core)
 add_subdirectory(topology)
 add_subdirectory(algorithms)
+add_subdirectory(viewer)
+
 add_subdirectory(apps)
 
 target_compile_features(core PRIVATE cxx_std_17)

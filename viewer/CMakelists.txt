@@ -1,0 +1,10 @@
+add_library(
+    viewer
+    # vtk_adaptor.cpp
+    viewer.cpp
+)
+
+target_include_directories(viewer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(viewer PRIVATE ${VTK_LIBRARIES})
+target_link_libraries(viewer PRIVATE core)

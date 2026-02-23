@@ -1,5 +1,8 @@
 #include <iostream>
-#include "mesh.hpp"
+#include <algorithm>
+
+#include "Mesh.hpp"
+#include "Loader.hpp"
 #include "NeighborBuilder.hpp"
 #include "Laplacian.hpp"
 
@@ -69,12 +72,36 @@ int main()
         mesh2.vertices[i].pos.z += alpha * lap2[i].z;
     }
 
+    Mesh mesh3;
+
+    bool res = Loader::loadBinarySTL("../assets/Textured Vase.stl", mesh3);
+    std::cout << "Loaded? " << res << "Faces: " << mesh3.face_count() << std::endl;
+
+    Vec3 min{1e9, 1e9, 1e9};
+    Vec3 max{-1e9, -1e9, -1e9};
+
+    for (const auto &v : mesh3.vertices)
+    {
+        min.x = std::min(min.x, v.pos.x);
+        min.y = std::min(min.y, v.pos.y);
+        min.z = std::min(min.z, v.pos.z);
+
+        max.x = std::max(max.x, v.pos.x);
+        max.y = std::max(max.y, v.pos.y);
+        max.z = std::max(max.z, v.pos.z);
+    }
+
+    std::cout << "Bounds:\n";
+    std::cout << "Min: " << min.x << ", " << min.y << ", " << min.z << "\n";
+    std::cout << "Max: " << max.x << ", " << max.y << ", " << max.z << "\n";
+
     // -------------------------------
     // Render both meshes
     // -------------------------------
     Viewer viewer;
     viewer.render(mesh1);
-    viewer.render(mesh2); // optionally you can merge into one viewer
+    viewer.render(mesh2);
+    viewer.render(mesh3);
 
     return 0;
 }

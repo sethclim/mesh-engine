@@ -8,5 +8,5 @@
 #include "Mesh.hpp"
 namespace Loader
 {
-    bool loadBinarySTL(const std::string &path, Mesh &mesh);
+    bool loadBinarySTL(const std::string &path, RawMesh &mesh);
 }

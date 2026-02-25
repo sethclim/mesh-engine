@@ -72,7 +72,7 @@ int main()
         mesh2.vertices[i].pos.z += alpha * lap2[i].z;
     }
 
-    Mesh mesh3;
+    RawMesh mesh3;
 
     bool res = Loader::loadBinarySTL("../assets/Textured Vase.stl", mesh3);
     std::cout << "Loaded? " << res << "Faces: " << mesh3.face_count() << std::endl;
@@ -95,13 +95,15 @@ int main()
     std::cout << "Min: " << min.x << ", " << min.y << ", " << min.z << "\n";
     std::cout << "Max: " << max.x << ", " << max.y << ", " << max.z << "\n";
 
+    Mesh m3 = Topology::weld_vertices(mesh3);
+
     // -------------------------------
     // Render both meshes
     // -------------------------------
     Viewer viewer;
     viewer.render(mesh1);
     viewer.render(mesh2);
-    viewer.render(mesh3);
+    viewer.render(m3);
 
     return 0;
 }

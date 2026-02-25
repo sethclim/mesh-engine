@@ -2,7 +2,7 @@
 
 namespace Loader
 {
-    bool loadBinarySTL(const std::string &path, Mesh &mesh)
+    bool loadBinarySTL(const std::string &path, RawMesh &mesh)
     {
         std::ifstream file(path, std::ios::binary);
         if (!file)

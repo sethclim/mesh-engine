@@ -82,13 +82,13 @@ int main()
 
     for (const auto &v : mesh3.vertices)
     {
-        min.x = std::min(min.x, v.pos.x);
-        min.y = std::min(min.y, v.pos.y);
-        min.z = std::min(min.z, v.pos.z);
+        min.x = std::min(min.x, v.x);
+        min.y = std::min(min.y, v.y);
+        min.z = std::min(min.z, v.z);
 
-        max.x = std::max(max.x, v.pos.x);
-        max.y = std::max(max.y, v.pos.y);
-        max.z = std::max(max.z, v.pos.z);
+        max.x = std::max(max.x, v.x);
+        max.y = std::max(max.y, v.y);
+        max.z = std::max(max.z, v.z);
     }
 
     std::cout << "Bounds:\n";

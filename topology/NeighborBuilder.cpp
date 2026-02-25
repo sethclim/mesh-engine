@@ -15,9 +15,9 @@ namespace Topology
             for (int i = 0; i < 3; i++)
             {
                 int index = t.v[i];
-                Vertex vertex = rMesh.vertices[index];
+                Vec3 pos = rMesh.vertices[index];
 
-                Vec3 key = quantize_pos(vertex.pos);
+                Vec3 key = quantize_pos(pos);
 
                 int mappedIndex;
                 if (vertexMap.find(key) != vertexMap.end())
@@ -27,7 +27,7 @@ namespace Topology
                 else
                 {
                     mappedIndex = newVertices.size();
-                    newVertices.emplace_back(vertex);
+                    newVertices.emplace_back(Vertex({ pos }));
                     vertexMap[key] = mappedIndex;
                 }
                 newFaceIndices.v[i] = mappedIndex;

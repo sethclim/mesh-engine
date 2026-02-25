@@ -34,9 +34,9 @@ namespace Loader
 
             int baseIndex = static_cast<int>(mesh.vertices.size());
 
-            mesh.vertices.push_back({{v0[0], v0[1], v0[2]}});
-            mesh.vertices.push_back({{v1[0], v1[1], v1[2]}});
-            mesh.vertices.push_back({{v2[0], v2[1], v2[2]}});
+            mesh.vertices.push_back({v0[0], v0[1], v0[2]});
+            mesh.vertices.push_back({v1[0], v1[1], v1[2]});
+            mesh.vertices.push_back({v2[0], v2[1], v2[2]});
 
             mesh.faces.push_back({baseIndex, baseIndex + 1, baseIndex + 2});
         }

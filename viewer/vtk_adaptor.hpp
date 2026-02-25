@@ -8,7 +8,7 @@
 class VTKAdapter
 {
 public:
-    static vtkSmartPointer<vtkPolyData> convert(const Mesh &mesh)
+    static vtkSmartPointer<vtkPolyData> convert(const BaseMesh &mesh)
     {
         auto points = vtkSmartPointer<vtkPoints>::New();
         auto polys = vtkSmartPointer<vtkCellArray>::New();

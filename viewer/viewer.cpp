@@ -1,6 +1,6 @@
 #include "viewer.hpp"
 
-void Viewer::render(const Mesh &mesh)
+void Viewer::render(const BaseMesh &mesh)
 {
     // Convert mesh → vtkPolyData
     vtkSmartPointer<vtkPolyData> polyData = VTKAdapter::convert(mesh);

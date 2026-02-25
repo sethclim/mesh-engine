@@ -14,5 +14,5 @@
 class Viewer
 {
 public:
-    void render(const Mesh &mesh);
+    void render(const BaseMesh &mesh);
 };

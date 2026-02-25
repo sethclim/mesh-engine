@@ -7,7 +7,7 @@
 
 namespace Topology
 {
-    const int EPS = 1e-6;
+    const double EPS = 1e-6;
     Mesh weld_vertices(RawMesh &rMesh);
     void build_neighbors(Mesh &mesh);
 

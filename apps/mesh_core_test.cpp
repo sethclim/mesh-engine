@@ -103,6 +103,7 @@ int main()
     Viewer viewer;
     viewer.render(mesh1);
     viewer.render(mesh2);
+    viewer.render(mesh3);
     viewer.render(m3);
 
     return 0;

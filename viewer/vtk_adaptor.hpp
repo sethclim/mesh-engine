@@ -3,6 +3,10 @@
 #include <vtkPoints.h>
 #include <vtkCellArray.h>
 #include <vtkTriangle.h>
+#include <vtkFloatArray.h>
+#include <vtkSmartPointer.h>
+#include <vtkPointData.h>
+
 #include "mesh.hpp"
 
 class VTKAdapter
@@ -37,6 +41,10 @@ public:
     {
         auto points = vtkSmartPointer<vtkPoints>::New();
         auto polys = vtkSmartPointer<vtkCellArray>::New();
+        auto vtkNormals = vtkSmartPointer<vtkFloatArray>::New();
+        vtkNormals->SetNumberOfComponents(3); // x, y, z
+        vtkNormals->SetNumberOfTuples(mesh.vertices.size());
+        vtkNormals->SetName("Normals"); // optional, but good practice
 
         // Fill points
         for (const auto &v : mesh.vertices)
@@ -52,9 +60,16 @@ public:
             polys->InsertNextCell(tri);
         }
 
+        for (size_t i = 0; i < mesh.vertices.size(); ++i)
+        {
+            const auto &n = mesh.vertices[i].normal; // or mesh.normals[i]
+            vtkNormals->SetTuple3(i, n.x, n.y, n.z);
+        }
+
         auto polydata = vtkSmartPointer<vtkPolyData>::New();
         polydata->SetPoints(points);
         polydata->SetPolys(polys);
+        polydata->GetPointData()->SetNormals(vtkNormals);
         return polydata;
     }
 };

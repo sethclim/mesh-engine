@@ -7,10 +7,12 @@
 #include "Laplacian.hpp"
 
 #include "viewer.hpp"
+#include "mesh_render_session.hpp"
+#include "raw_mesh_render_session.hpp"
 
 int main()
 {
-    Viewer viewer;
+    // Viewer viewer;
 
     // -------------------------------
     // Mesh 1: square (your existing mesh)
@@ -40,7 +42,9 @@ int main()
         }
     }
 
-    viewer.render(mesh1);
+    Viewer::render(mesh1)
+        .show_vertex_normals(8)
+        .run();
 
     // -------------------------------
     // Mesh 2: pyramid
@@ -77,15 +81,16 @@ int main()
         mesh2.vertices[i].pos.z += alpha * lap2[i].z;
     }
 
-    viewer.render(mesh2);
+    Viewer::render(mesh2)
+        .show_vertex_normals(1)
+        .run();
 
     RawMesh mesh3;
 
     bool res = Loader::loadBinarySTL("../assets/Textured Vase.stl", mesh3);
     std::cout << "Loaded? " << res << "Faces: " << mesh3.face_count() << std::endl;
 
-
-    viewer.render(mesh3);
+    // viewer.render(mesh3);
 
     Vec3 min{1e9, 1e9, 1e9};
     Vec3 max{-1e9, -1e9, -1e9};
@@ -106,10 +111,12 @@ int main()
     std::cout << "Max: " << max.x << ", " << max.y << ", " << max.z << "\n";
 
     Mesh m3 = Topology::weld_vertices(mesh3);
-    //Topology::build_neighbors(m3);
+    // Topology::build_neighbors(m3);
     Topology::calculate_normals(m3);
 
-    viewer.render(m3);
+    Viewer::render(m3)
+        .show_vertex_normals(8)
+        .run();
 
     return 0;
 }

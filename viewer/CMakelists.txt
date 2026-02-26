@@ -2,6 +2,8 @@ add_library(
     viewer
     # vtk_adaptor.cpp
     viewer.cpp
+    mesh_render_session.cpp
+    raw_mesh_render_session.cpp
 )
 
 target_include_directories(viewer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

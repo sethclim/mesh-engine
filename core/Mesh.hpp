@@ -98,6 +98,15 @@ public:
     int face_count() const;
 };
 
+using Edge = std::pair<int, int>;
+
+struct EdgeClassification
+{
+    std::vector<Edge> boundaryEdges;
+    std::vector<Edge> interiorEdges;
+    std::vector<Edge> nonManifoldEdges;
+};
+
 class Mesh
 {
 public:
@@ -106,7 +115,10 @@ public:
     // std::vector<std::vector<int>> neighbors;
     std::vector<std::vector<int>> neighbors;
 
+    EdgeClassification edges;
+
     bool hasNormals = false;
+    bool hasEdges = false;
 
     int add_vertex(const Vec3 &v);
     void add_triangle(int v0, int v1, int v2);

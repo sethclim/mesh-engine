@@ -61,8 +61,10 @@ namespace Topology
             else
                 nonManifoldEdges.push_back(e);
 
-            std::cout << "Key: (" << e.first << " " << e.second << ") , Value: " << it->second << "\n";
+            // std::cout << "Key: (" << e.first << " " << e.second << ") , Value: " << it->second << "\n";
         }
+
+        std::cout << "boundaryEdges: " << boundaryEdges.size() << " interiorEdges " << interiorEdges.size() << " nonManifoldEdges: " << nonManifoldEdges.size() << "\n";
 
         mesh.edges.boundaryEdges = boundaryEdges;
         mesh.edges.interiorEdges = interiorEdges;

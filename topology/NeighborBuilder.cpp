@@ -27,7 +27,7 @@ namespace Topology
                 else
                 {
                     mappedIndex = newVertices.size();
-                    newVertices.emplace_back(Vertex({ pos }));
+                    newVertices.emplace_back(Vertex({pos}));
                     vertexMap[key] = mappedIndex;
                 }
                 newFaceIndices.v[i] = mappedIndex;
@@ -71,6 +71,27 @@ namespace Topology
                     std::vector<int>(temp[i].begin(), temp[i].end());
             }
         }
+    }
+
+    void calculate_normals(Mesh &mesh)
+    {
+        for (const Triangle &f : mesh.faces)
+        {
+            Vec3 v0 = mesh.vertices[f.v[0]].pos;
+            Vec3 v1 = mesh.vertices[f.v[1]].pos;
+            Vec3 v2 = mesh.vertices[f.v[2]].pos;
+
+            Vec3 e1 = v1 - v0;
+            Vec3 e2 = v2 - v0;
+
+            Vec3 faceNormal = cross(e1, e2);
+
+            mesh.vertices[f.v[0]].normal += faceNormal;
+            mesh.vertices[f.v[1]].normal += faceNormal;
+            mesh.vertices[f.v[2]].normal += faceNormal;
+        }
+        for (auto &v : mesh.vertices)
+            v.normal = normalize(v.normal);
     }
 
     Vec3 quantize_pos(Vec3 pos)

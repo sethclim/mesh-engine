@@ -43,7 +43,6 @@ int main()
     }
 
     Viewer::render(mesh1)
-        .show_vertex_normals(8)
         .run();
 
     // -------------------------------
@@ -82,7 +81,7 @@ int main()
     }
 
     Viewer::render(mesh2)
-        .show_vertex_normals(1)
+        .show_vertex_normals(0.1)
         .run();
 
     RawMesh mesh3;
@@ -116,6 +115,7 @@ int main()
 
     Viewer::render(m3)
         .show_vertex_normals(8)
+        .smooth_shading()
         .run();
 
     return 0;

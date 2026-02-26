@@ -12,11 +12,19 @@ MeshRenderSession &MeshRenderSession::show_vertex_normals(
     return *this;
 }
 
+MeshRenderSession &MeshRenderSession::smooth_shading()
+{
+    smoothShading = true;
+    return *this;
+}
+
 void MeshRenderSession::run()
 {
     auto renderer = vtkSmartPointer<vtkRenderer>::New();
     auto window = vtkSmartPointer<vtkRenderWindow>::New();
     auto interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
+
+    renderer->SetBackground(0.1, 0.2, 0.4);
 
     window->AddRenderer(renderer);
     interactor->SetRenderWindow(window);
@@ -24,34 +32,38 @@ void MeshRenderSession::run()
     // Convert mesh → polydata
     auto polyData = VTKAdapter::convert(mesh);
 
+    auto sourceNormals = polyData->GetPointData()->GetNormals();
+
     auto mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
     mapper->SetInputData(polyData);
 
     auto actor = vtkSmartPointer<vtkActor>::New();
     actor->SetMapper(mapper);
+    // actor->GetProperty()->LightingOff();
+    actor->GetProperty()->SetColor(1.0, 0.5, 0.3);
 
     renderer->AddActor(actor);
 
+    if (smoothShading)
+        actor->GetProperty()->SetInterpolationToPhong();
+
     if (draw_normals)
     {
-        display_vertex_normals(mesh, renderer, 4);
+        display_vertex_normals(mesh, sourceNormals, renderer, normal_scale);
     }
 
     window->Render();
     interactor->Start();
 }
 
-void MeshRenderSession::display_vertex_normals(const Mesh &mesh, vtkRenderer *renderer, double scale)
+void MeshRenderSession::display_vertex_normals(const Mesh &mesh, vtkDataArray *normals, vtkRenderer *renderer, double scale)
 {
     auto points = vtkSmartPointer<vtkPoints>::New();
-    auto normals = vtkSmartPointer<vtkDoubleArray>::New();
-    normals->SetNumberOfComponents(3);
-    normals->SetName("Normals");
 
     for (auto &v : mesh.vertices)
     {
         points->InsertNextPoint(v.pos.x, v.pos.y, v.pos.z);
-        normals->InsertNextTuple3(v.normal.x, v.normal.y, v.normal.z);
+        // normals->InsertNextTuple3(v.normal.x, v.normal.y, v.normal.z);
     }
 
     auto polyData = vtkSmartPointer<vtkPolyData>::New();

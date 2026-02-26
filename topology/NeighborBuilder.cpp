@@ -92,6 +92,8 @@ namespace Topology
         }
         for (auto &v : mesh.vertices)
             v.normal = normalize(v.normal);
+
+        mesh.hasNormals = true;
     }
 
     Vec3 quantize_pos(Vec3 pos)

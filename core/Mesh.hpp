@@ -106,6 +106,8 @@ public:
     // std::vector<std::vector<int>> neighbors;
     std::vector<std::vector<int>> neighbors;
 
+    bool hasNormals = false;
+
     int add_vertex(const Vec3 &v);
     void add_triangle(int v0, int v1, int v2);
     int vertex_count() const;

@@ -33,10 +33,12 @@ public:
         double scale = 0.4,
         const Vec3 &color = {1, 1, 0});
 
+    MeshRenderSession &smooth_shading();
+
     void run();
 
 private:
-    void display_vertex_normals(const Mesh &mesh, vtkRenderer *renderer, double scale = 0.4);
+    void display_vertex_normals(const Mesh &mesh, vtkDataArray *normals, vtkRenderer *renderer, double scale = 0.4);
 
 private:
     const Mesh &mesh;
@@ -44,4 +46,6 @@ private:
     bool draw_normals = false;
     double normal_scale = 0.4;
     Vec3 normal_color = {1, 1, 0};
+
+    bool smoothShading = false;
 };

@@ -91,7 +91,7 @@ int main()
     bool res = Loader::loadBinarySTL("../assets/Textured Vase.stl", mesh3);
     std::cout << "Loaded? " << res << "Faces: " << mesh3.face_count() << std::endl;
 
-    // viewer.render(mesh3);
+    Viewer::render(mesh3).run();
 
     Vec3 min{1e9, 1e9, 1e9};
     Vec3 max{-1e9, -1e9, -1e9};

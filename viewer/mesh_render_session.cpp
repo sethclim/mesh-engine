@@ -75,7 +75,6 @@ void MeshRenderSession::display_vertex_normals(const Mesh &mesh, vtkDataArray *n
     for (auto &v : mesh.vertices)
     {
         points->InsertNextPoint(v.pos.x, v.pos.y, v.pos.z);
-        // normals->InsertNextTuple3(v.normal.x, v.normal.y, v.normal.z);
     }
 
     auto polyData = vtkSmartPointer<vtkPolyData>::New();

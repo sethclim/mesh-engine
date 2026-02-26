@@ -29,16 +29,16 @@ class RawMeshRenderSession
 public:
     RawMeshRenderSession(const RawMesh &mesh);
 
-    RawMeshRenderSession &show_vertex_normals(
-        double scale = 0.4,
-        const Vec3 &color = {1, 1, 0});
+    // RawMeshRenderSession &show_vertex_normals(
+    //     double scale = 0.4,
+    //     const Vec3 &color = {1, 1, 0});
 
     void run();
 
 private:
     const RawMesh &mesh;
 
-    bool draw_normals = false;
-    double normal_scale = 0.4;
-    Vec3 normal_color = {1, 1, 0};
+    // bool draw_normals = false;
+    // double normal_scale = 0.4;
+    // Vec3 normal_color = {1, 1, 0};
 };

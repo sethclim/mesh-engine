@@ -34,6 +34,8 @@ public:
         const Vec3 &color = {1, 1, 0});
 
     MeshRenderSession &smooth_shading();
+    MeshRenderSession &color(Vec3 color);
+    MeshRenderSession &background_color(Vec3 color);
 
     void run();
 
@@ -48,4 +50,6 @@ private:
     Vec3 normal_color = {1, 1, 0};
 
     bool smoothShading = false;
+    Vec3 meshColor = {1.0, 0.5, 0.3};
+    Vec3 backgroundColor = {0.1, 0.2, 0.4};
 };

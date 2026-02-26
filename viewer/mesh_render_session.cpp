@@ -18,13 +18,25 @@ MeshRenderSession &MeshRenderSession::smooth_shading()
     return *this;
 }
 
+MeshRenderSession &MeshRenderSession::color(Vec3 color)
+{
+    meshColor = color;
+    return *this;
+}
+
+MeshRenderSession &MeshRenderSession::background_color(Vec3 color)
+{
+    backgroundColor = color;
+    return *this;
+}
+
 void MeshRenderSession::run()
 {
     auto renderer = vtkSmartPointer<vtkRenderer>::New();
     auto window = vtkSmartPointer<vtkRenderWindow>::New();
     auto interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
 
-    renderer->SetBackground(0.1, 0.2, 0.4);
+    renderer->SetBackground(backgroundColor.x, backgroundColor.y, backgroundColor.z);
 
     window->AddRenderer(renderer);
     interactor->SetRenderWindow(window);
@@ -40,7 +52,7 @@ void MeshRenderSession::run()
     auto actor = vtkSmartPointer<vtkActor>::New();
     actor->SetMapper(mapper);
     // actor->GetProperty()->LightingOff();
-    actor->GetProperty()->SetColor(1.0, 0.5, 0.3);
+    actor->GetProperty()->SetColor(meshColor.x, meshColor.y, meshColor.z);
 
     renderer->AddActor(actor);
 

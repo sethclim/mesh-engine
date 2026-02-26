@@ -12,8 +12,6 @@
 
 int main()
 {
-    // Viewer viewer;
-
     // -------------------------------
     // Mesh 1: square (your existing mesh)
     // -------------------------------
@@ -43,6 +41,8 @@ int main()
     }
 
     Viewer::render(mesh1)
+        .color({0.7, 0.7, 0.7})
+        .background_color({0.9, 0.9, 0.9})
         .run();
 
     // -------------------------------
@@ -81,6 +81,8 @@ int main()
     }
 
     Viewer::render(mesh2)
+        .color({0.7, 0.7, 0.7})
+        .background_color({0.9, 0.9, 0.9})
         .show_vertex_normals(0.1)
         .run();
 
@@ -114,7 +116,9 @@ int main()
     Topology::calculate_normals(m3);
 
     Viewer::render(m3)
-        .show_vertex_normals(8)
+        .color({0.7, 0.7, 0.7})
+        .background_color({0.9, 0.9, 0.9})
+        // .show_vertex_normals(8)
         .smooth_shading()
         .run();
 

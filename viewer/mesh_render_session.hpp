@@ -32,11 +32,9 @@ public:
 
     MeshRenderSession &show_vertex_normals(
         double scale = 0.4,
-        const Vec3 &color = {1, 1, 0});
+        const Vec3 &color = {0.2588, 0.5294, 0.9608});
 
     MeshRenderSession &smooth_shading();
-    // MeshRenderSession &color(Vec3 color);
-    // MeshRenderSession &background_color(Vec3 color);
 
     void run();
 
@@ -48,9 +46,7 @@ private:
 
     bool draw_normals = false;
     double normal_scale = 0.4;
-    Vec3 normal_color = {1, 1, 0};
+    Vec3 normal_color = {0.2588, 0.5294, 0.9608};
 
     bool smoothShading = false;
-    // Vec3 meshColor = {1.0, 0.5, 0.3};
-    // Vec3 backgroundColor = {0.1, 0.2, 0.4};
 };

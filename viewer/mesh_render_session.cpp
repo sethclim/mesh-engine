@@ -29,21 +29,11 @@ void MeshRenderSession::run()
 
     auto actor = create_actor(polyData);
 
-    // auto mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-    // mapper->SetInputData(polyData);
-
-    // auto actor = vtkSmartPointer<vtkActor>::New();
-    // actor->SetMapper(mapper);
-    // // actor->GetProperty()->LightingOff();
-    // actor->GetProperty()->SetColor(actorColor.x, actorColor.y, actorColor.z);
-
     if (smoothShading)
         actor->GetProperty()->SetInterpolationToPhong();
 
     if (draw_normals)
-    {
         display_vertex_normals(mesh, sourceNormals, ctx.renderer, normal_scale);
-    }
 
     start_interaction(ctx, actor);
 }
@@ -79,6 +69,7 @@ void MeshRenderSession::display_vertex_normals(const Mesh &mesh, vtkDataArray *n
 
     auto actor = vtkSmartPointer<vtkActor>::New();
     actor->SetMapper(mapper);
+    actor->GetProperty()->SetColor(normal_color.x, normal_color.y, normal_color.z);
 
     renderer->AddActor(actor);
 }

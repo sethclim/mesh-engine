@@ -91,7 +91,7 @@ int main()
     bool res = Loader::loadBinarySTL("../assets/Textured Vase.stl", mesh3);
     std::cout << "Loaded? " << res << "Faces: " << mesh3.face_count() << std::endl;
 
-    Viewer::render(mesh3).run();
+    Viewer::render(mesh3).color({0.7, 0.7, 0.7}).background_color({0.9, 0.9, 0.9}).run();
 
     Vec3 min{1e9, 1e9, 1e9};
     Vec3 max{-1e9, -1e9, -1e9};
@@ -112,13 +112,13 @@ int main()
     std::cout << "Max: " << max.x << ", " << max.y << ", " << max.z << "\n";
 
     Mesh m3 = Topology::weld_vertices(mesh3);
-    // Topology::build_neighbors(m3);
+    Topology::build_neighbors(m3);
     Topology::calculate_normals(m3);
 
     Viewer::render(m3)
         .color({0.7, 0.7, 0.7})
         .background_color({0.9, 0.9, 0.9})
-        // .show_vertex_normals(8)
+        .show_vertex_normals(20)
         .smooth_shading()
         .run();
 

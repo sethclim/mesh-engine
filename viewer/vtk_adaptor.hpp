@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vtkPolyData.h>
 #include <vtkPoints.h>
 #include <vtkCellArray.h>

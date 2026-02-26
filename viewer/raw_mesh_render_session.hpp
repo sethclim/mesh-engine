@@ -23,8 +23,9 @@
 #include "vtk_adaptor.hpp"
 
 #include "Mesh.hpp"
+#include "base_render_session.hpp"
 
-class RawMeshRenderSession
+class RawMeshRenderSession : public BaseRenderSession<RawMeshRenderSession>
 {
 public:
     RawMeshRenderSession(const RawMesh &mesh);

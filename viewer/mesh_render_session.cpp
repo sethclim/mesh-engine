@@ -18,54 +18,34 @@ MeshRenderSession &MeshRenderSession::smooth_shading()
     return *this;
 }
 
-MeshRenderSession &MeshRenderSession::color(Vec3 color)
-{
-    meshColor = color;
-    return *this;
-}
-
-MeshRenderSession &MeshRenderSession::background_color(Vec3 color)
-{
-    backgroundColor = color;
-    return *this;
-}
-
 void MeshRenderSession::run()
 {
-    auto renderer = vtkSmartPointer<vtkRenderer>::New();
-    auto window = vtkSmartPointer<vtkRenderWindow>::New();
-    auto interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
 
-    renderer->SetBackground(backgroundColor.x, backgroundColor.y, backgroundColor.z);
-
-    window->AddRenderer(renderer);
-    interactor->SetRenderWindow(window);
-
+    RenderContext ctx = create_render_context();
     // Convert mesh → polydata
     auto polyData = VTKAdapter::convert(mesh);
 
     auto sourceNormals = polyData->GetPointData()->GetNormals();
 
-    auto mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-    mapper->SetInputData(polyData);
+    auto actor = create_actor(polyData);
 
-    auto actor = vtkSmartPointer<vtkActor>::New();
-    actor->SetMapper(mapper);
-    // actor->GetProperty()->LightingOff();
-    actor->GetProperty()->SetColor(meshColor.x, meshColor.y, meshColor.z);
+    // auto mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+    // mapper->SetInputData(polyData);
 
-    renderer->AddActor(actor);
+    // auto actor = vtkSmartPointer<vtkActor>::New();
+    // actor->SetMapper(mapper);
+    // // actor->GetProperty()->LightingOff();
+    // actor->GetProperty()->SetColor(actorColor.x, actorColor.y, actorColor.z);
 
     if (smoothShading)
         actor->GetProperty()->SetInterpolationToPhong();
 
     if (draw_normals)
     {
-        display_vertex_normals(mesh, sourceNormals, renderer, normal_scale);
+        display_vertex_normals(mesh, sourceNormals, ctx.renderer, normal_scale);
     }
 
-    window->Render();
-    interactor->Start();
+    start_interaction(ctx, actor);
 }
 
 void MeshRenderSession::display_vertex_normals(const Mesh &mesh, vtkDataArray *normals, vtkRenderer *renderer, double scale)

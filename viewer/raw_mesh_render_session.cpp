@@ -14,24 +14,11 @@ RawMeshRenderSession::RawMeshRenderSession(const RawMesh &mesh) : mesh(mesh) {};
 
 void RawMeshRenderSession::run()
 {
-    auto renderer = vtkSmartPointer<vtkRenderer>::New();
-    auto window = vtkSmartPointer<vtkRenderWindow>::New();
-    auto interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
+    RenderContext ctx = create_render_context();
 
-    window->AddRenderer(renderer);
-    interactor->SetRenderWindow(window);
-
-    // Convert mesh → polydata
     auto polyData = VTKAdapter::convert(mesh);
 
-    auto mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-    mapper->SetInputData(polyData);
+    auto actor = create_actor(polyData);
 
-    auto actor = vtkSmartPointer<vtkActor>::New();
-    actor->SetMapper(mapper);
-
-    renderer->AddActor(actor);
-
-    window->Render();
-    interactor->Start();
+    start_interaction(ctx, actor);
 }

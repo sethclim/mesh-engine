@@ -1,0 +1,19 @@
+[build-system]
+requires = ["scikit-build-core>=0.8", "pybind11>=2.12"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "meshlib"
+version = "0.1.0"
+description = "High-performance C++ mesh processing library"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Seth Climenhaga" }]
+
+[tool.scikit-build]
+cmake.verbose = true
+build-dir = "build/{wheel_tag}"
+
+[tool.scikit-build.cmake.define]
+CMAKE_TOOLCHAIN_FILE = "C:/Users/sethc/coding/cplusplus/dependencies/vcpkg/scripts/buildsystems/vcpkg.cmake"

@@ -70,6 +70,6 @@ namespace Topology
         mesh.edges.interiorEdges = interiorEdges;
         mesh.edges.nonManifoldEdges = nonManifoldEdges;
 
-        mesh.hasEdges = true;
+        mesh.set_has_edges(true);
     }
 }

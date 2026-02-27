@@ -41,3 +41,23 @@ int Mesh::face_count() const
 {
     return faces.size();
 }
+
+bool Mesh::has_normals() const
+{
+    return hasNormals;
+}
+
+void Mesh::set_has_normals(bool value)
+{
+    hasNormals = value;
+}
+
+bool Mesh::has_edges() const
+{
+    return hasEdges;
+}
+
+void Mesh::set_has_edges(bool value)
+{
+    hasEdges = value;
+}

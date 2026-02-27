@@ -117,11 +117,18 @@ public:
 
     EdgeClassification edges;
 
-    bool hasNormals = false;
-    bool hasEdges = false;
-
     int add_vertex(const Vec3 &v);
     void add_triangle(int v0, int v1, int v2);
     int vertex_count() const;
     int face_count() const;
+
+    bool has_normals() const;
+    void set_has_normals(bool value);
+
+    bool has_edges() const;
+    void set_has_edges(bool value);
+
+private:
+    bool hasNormals = false;
+    bool hasEdges = false;
 };

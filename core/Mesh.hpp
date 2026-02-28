@@ -90,7 +90,6 @@ class RawMesh
 public:
     std::vector<Vec3> vertices;
     std::vector<Triangle> faces;
-    // std::vector<std::vector<int>> neighbors;
 
     int add_vertex(const Vec3 &v);
     void add_triangle(int v0, int v1, int v2);
@@ -112,7 +111,6 @@ class Mesh
 public:
     std::vector<Vertex> vertices;
     std::vector<Triangle> faces;
-    // std::vector<std::vector<int>> neighbors;
     std::vector<std::vector<int>> neighbors;
 
     EdgeClassification edges;
@@ -129,6 +127,6 @@ public:
     void set_has_edges(bool value);
 
 private:
-    bool hasNormals = false;
-    bool hasEdges = false;
+    bool m_HasNormals = false;
+    bool m_HasEdges = false;
 };

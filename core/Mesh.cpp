@@ -44,20 +44,20 @@ int Mesh::face_count() const
 
 bool Mesh::has_normals() const
 {
-    return hasNormals;
+    return m_HasNormals;
 }
 
 void Mesh::set_has_normals(bool value)
 {
-    hasNormals = value;
+    m_HasNormals = value;
 }
 
 bool Mesh::has_edges() const
 {
-    return hasEdges;
+    return m_HasEdges;
 }
 
 void Mesh::set_has_edges(bool value)
 {
-    hasEdges = value;
+    m_HasEdges = value;
 }

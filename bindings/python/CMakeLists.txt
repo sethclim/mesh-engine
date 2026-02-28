@@ -6,5 +6,6 @@ pybind11_add_module(meshlib module.cpp)
 target_link_libraries(meshlib
     PRIVATE
     core
+    topology
     pybind11::headers
 )

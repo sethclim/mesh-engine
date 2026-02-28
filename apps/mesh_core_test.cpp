@@ -75,6 +75,7 @@ int main()
 
     Topology::build_neighbors(mesh2);
     Topology::calculate_normals(mesh2);
+    Topology::edge_detection(mesh2);
 
     auto lap2 = Algorithms::Laplacian(mesh2);
     for (size_t i = 0; i < mesh2.vertex_count(); ++i)
@@ -88,6 +89,7 @@ int main()
         .color({0.7, 0.7, 0.7})
         .background_color({0.9, 0.9, 0.9})
         .show_vertex_normals(0.1)
+        .show_edges()
         .run();
 
     RawMesh mesh3;

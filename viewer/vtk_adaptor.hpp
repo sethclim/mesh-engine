@@ -44,7 +44,7 @@ public:
         auto polys = vtkSmartPointer<vtkCellArray>::New();
         vtkSmartPointer<vtkFloatArray> vtkNormals;
 
-        if (mesh.hasNormals)
+        if (mesh.has_normals())
         {
             vtkNormals = vtkSmartPointer<vtkFloatArray>::New();
             vtkNormals->SetNumberOfComponents(3); // x, y, z
@@ -66,7 +66,7 @@ public:
             polys->InsertNextCell(tri);
         }
 
-        if (mesh.hasNormals)
+        if (mesh.has_normals())
         {
             for (size_t i = 0; i < mesh.vertices.size(); ++i)
             {
@@ -78,7 +78,7 @@ public:
         auto polydata = vtkSmartPointer<vtkPolyData>::New();
         polydata->SetPoints(points);
         polydata->SetPolys(polys);
-        if (mesh.hasNormals)
+        if (mesh.has_normals())
             polydata->GetPointData()->SetNormals(vtkNormals);
         return polydata;
     }

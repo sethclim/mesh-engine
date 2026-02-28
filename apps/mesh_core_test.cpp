@@ -1,5 +1,8 @@
 #include <iostream>
-#include "mesh.hpp"
+#include <algorithm>
+
+#include "Mesh.hpp"
+#include "Loader.hpp"
 #include "NeighborBuilder.hpp"
 #include "Laplacian.hpp"
 
@@ -7,6 +10,8 @@
 
 int main()
 {
+    Viewer viewer;
+
     // -------------------------------
     // Mesh 1: square (your existing mesh)
     // -------------------------------
@@ -35,6 +40,8 @@ int main()
         }
     }
 
+    viewer.render(mesh1);
+
     // -------------------------------
     // Mesh 2: pyramid
     // -------------------------------
@@ -60,6 +67,7 @@ int main()
     mesh2.add_triangle(b3, b0, apex);
 
     Topology::build_neighbors(mesh2);
+    Topology::calculate_normals(mesh2);
 
     auto lap2 = Algorithms::Laplacian(mesh2);
     for (size_t i = 0; i < mesh2.vertex_count(); ++i)
@@ -69,12 +77,39 @@ int main()
         mesh2.vertices[i].pos.z += alpha * lap2[i].z;
     }
 
-    // -------------------------------
-    // Render both meshes
-    // -------------------------------
-    Viewer viewer;
-    viewer.render(mesh1);
-    viewer.render(mesh2); // optionally you can merge into one viewer
+    viewer.render(mesh2);
+
+    RawMesh mesh3;
+
+    bool res = Loader::loadBinarySTL("../assets/Textured Vase.stl", mesh3);
+    std::cout << "Loaded? " << res << "Faces: " << mesh3.face_count() << std::endl;
+
+
+    viewer.render(mesh3);
+
+    Vec3 min{1e9, 1e9, 1e9};
+    Vec3 max{-1e9, -1e9, -1e9};
+
+    for (const auto &v : mesh3.vertices)
+    {
+        min.x = std::min(min.x, v.x);
+        min.y = std::min(min.y, v.y);
+        min.z = std::min(min.z, v.z);
+
+        max.x = std::max(max.x, v.x);
+        max.y = std::max(max.y, v.y);
+        max.z = std::max(max.z, v.z);
+    }
+
+    std::cout << "Bounds:\n";
+    std::cout << "Min: " << min.x << ", " << min.y << ", " << min.z << "\n";
+    std::cout << "Max: " << max.x << ", " << max.y << ", " << max.z << "\n";
+
+    Mesh m3 = Topology::weld_vertices(mesh3);
+    //Topology::build_neighbors(m3);
+    Topology::calculate_normals(m3);
+
+    viewer.render(m3);
 
     return 0;
 }

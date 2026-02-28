@@ -25,3 +25,5 @@ add_subdirectory(apps)
 target_compile_features(core PRIVATE cxx_std_17)
 set_target_properties(core PROPERTIES LINKER_LANGUAGE CXX)
 
+file(GLOB ASSETS "${CMAKE_SOURCE_DIR}/assets/*")
+file(COPY ${ASSETS} DESTINATION ${CMAKE_BINARY_DIR}/assets)

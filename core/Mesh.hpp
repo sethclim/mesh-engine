@@ -5,6 +5,14 @@
 struct Vec3
 {
     double x, y, z;
+
+    Vec3 &operator+=(const Vec3 &other)
+    {
+        x += other.x;
+        y += other.y;
+        z += other.z;
+        return *this;
+    }
 };
 
 struct Vertex
@@ -29,3 +37,8 @@ public:
     int vertex_count() const;
     int face_count() const;
 };
+
+inline Vec3 operator*(double s, const Vec3 &v)
+{
+    return {s * v.x, s * v.y, s * v.z};
+}

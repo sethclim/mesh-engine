@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "configurePresets": [
+    {
+      "name": "default",
+      "inherits": "vcpkg",
+      "environment": {
+        "VCPKG_ROOT": "C:/Users/sethc/coding/cplusplus/dependencies/vcpkg"
+      },
+      "architecture": {
+        "value": "x64"
+      }
+    }
+  ]
+}

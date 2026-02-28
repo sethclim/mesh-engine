@@ -8,6 +8,7 @@ target_link_libraries(meshlib
     core
     topology
     viewer
+    algorithms
     ${VTK_LIBRARIES}
 )
 

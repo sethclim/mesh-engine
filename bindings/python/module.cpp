@@ -3,6 +3,7 @@
 #include "Mesh.hpp"
 #include "edge_detection.hpp"
 #include "NeighborBuilder.hpp"
+#include "Laplacian.hpp"
 
 #include "mesh_render_session.hpp"
 #include "raw_mesh_render_session.hpp"
@@ -85,4 +86,8 @@ PYBIND11_MODULE(meshlib, m)
 
         .def_static("render",
                     py::overload_cast<const RawMesh &>(&Viewer::render));
+
+    py::module_ algo = m.def_submodule("algorithms");
+
+    algo.def("laplacian", &Algorithms::Laplacian);
 }

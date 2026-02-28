@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 
 #include <vector>
 
@@ -26,6 +26,6 @@ public:
 
     int add_vertex(const Vec3 &v);
     void add_triangle(int v0, int v1, int v2);
-    int vertex_count();
-    int face_count();
+    int vertex_count() const;
+    int face_count() const;
 };

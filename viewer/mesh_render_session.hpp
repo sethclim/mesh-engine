@@ -19,6 +19,10 @@
 #include <vtkActor.h>
 #include <vtkRenderer.h>
 #include <vtkSmartPointer.h>
+#include <vtkUnsignedCharArray.h>
+#include <vtkCellArray.h>
+#include <vtkLine.h>
+#include <vtkCellData.h>
 
 #include "vtk_adaptor.hpp"
 
@@ -36,10 +40,13 @@ public:
 
     MeshRenderSession &smooth_shading();
 
+    MeshRenderSession &show_edges();
+
     void run();
 
 private:
     void display_vertex_normals(const Mesh &mesh, vtkDataArray *normals, vtkRenderer *renderer, double scale = 0.4);
+    void display_edge_detection_results(const Mesh &mesh, vtkRenderer *renderer);
 
 private:
     const Mesh &mesh;
@@ -49,4 +56,5 @@ private:
     Vec3 normal_color = {0.2588, 0.5294, 0.9608};
 
     bool smoothShading = false;
+    bool showEdges = false;
 };

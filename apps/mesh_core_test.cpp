@@ -4,6 +4,7 @@
 #include "Mesh.hpp"
 #include "Loader.hpp"
 #include "NeighborBuilder.hpp"
+#include "edge_detection.hpp"
 #include "Laplacian.hpp"
 
 #include "viewer.hpp"
@@ -27,6 +28,8 @@ int main()
 
     Topology::build_neighbors(mesh1);
 
+    Topology::edge_detection(mesh1);
+
     double alpha = 0.1;
     auto lap1 = Algorithms::Laplacian(mesh1);
 
@@ -43,6 +46,7 @@ int main()
     Viewer::render(mesh1)
         .color({0.7, 0.7, 0.7})
         .background_color({0.9, 0.9, 0.9})
+        .show_edges()
         .run();
 
     // -------------------------------
@@ -112,14 +116,16 @@ int main()
     std::cout << "Max: " << max.x << ", " << max.y << ", " << max.z << "\n";
 
     Mesh m3 = Topology::weld_vertices(mesh3);
-    Topology::build_neighbors(m3);
+    // Topology::build_neighbors(m3);
     Topology::calculate_normals(m3);
+    Topology::edge_detection(m3);
 
     Viewer::render(m3)
         .color({0.7, 0.7, 0.7})
         .background_color({0.9, 0.9, 0.9})
-        .show_vertex_normals(20)
+        // .show_vertex_normals(20)
         .smooth_shading()
+        .show_edges()
         .run();
 
     return 0;

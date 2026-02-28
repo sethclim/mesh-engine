@@ -7,5 +7,11 @@ target_link_libraries(meshlib
     PRIVATE
     core
     topology
-    pybind11::headers
+    viewer
+    ${VTK_LIBRARIES}
+)
+
+vtk_module_autoinit(
+  TARGETS meshlib
+  MODULES ${VTK_LIBRARIES}
 )
